@@ -34,8 +34,7 @@ hide:
 
 <p align="center">快速上手Rust，掌握Rust语言核心知识！<br><br></p>
 
-<p align="center">作者: <a href="https://phy.xyz" target="_blank">https://phy.xyz</a></p>
-<p align="center"><img src="https://phy.xyz/images/wechat.jpg" width="200" /></p>
+<p align="center">作者: <a href="https://github.com/panhyuan" target="_blank">panhyuan</a></p>
 
 <p align="center">
   <a href="/rust/00_preface/01_introduction/" class="rounded-button">
