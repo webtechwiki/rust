@@ -34,7 +34,7 @@ hide:
 
 <p align="center">快速上手Rust，掌握Rust语言核心知识！<br><br></p>
 
-<p align="center">作者: <a href="https://github.com/geekdex" target="_blank">极客开发者</a></p>
+<p align="center">作者: <a href="https://github.com/geekdex" target="_blank">geekdex</a></p>
 <p align="center"><img src="img/imgeekdev.webp" width="160" /></p>
 
 <p align="center">
