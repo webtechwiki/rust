@@ -1,6 +1,6 @@
 # Rust中文Wiki
 
-作者：<https://phy.xyz>
+作者：<https://github.com/geekdex>
 公众号：极客开发者
 
 ## 1.为什么要使用Rust？

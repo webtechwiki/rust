@@ -1,13 +1,13 @@
 site_name: Rust中文Wiki
-site_url: https://webtech.wiki/rust
+site_url: https://rust.webtech.wiki
 repo_url: https://github.com/webtechwiki/rust
 repo_name: Rust Chinese Wiki
-site_author: phy.xyz
+site_author: geekdex
 site_description: Rust快速入门
 edit_uri: tree/main/docs
 
 # Copyright
-copyright: Copyright &copy; 2022 - 2023 phy.xyz
+copyright: Copyright &copy; 2022 - 2023 webtech.wiki
 
 # Theme
 theme:
