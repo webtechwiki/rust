@@ -15,7 +15,7 @@ additional-css = [
     "theme/listing.css",
 ]
 additional-js = ["ferris.js"]
-git-repository-url = "https://github.com/KaiserY/trpl-zh-cn/tree/main"
+git-repository-url = "https://github.com/webtechwiki/rust"
 
 [output.html.search]
 use-boolean-and = true
