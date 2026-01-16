@@ -22,47 +22,41 @@ jobs:
       # 1. 安装依赖
       - uses: actions/checkout@v4
       
-      - name: Cache cargo registry
-        uses: actions/cache@v3
-        with:
-          path: ~/.cargo/registry
-          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
-      
-      - name: Cache cargo index
-        uses: actions/cache@v3
-        with:
-          path: ~/.cargo/git
-          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
-      
-      - name: Cache cargo build
-        uses: actions/cache@v3
-        with:
-          path: ~/.cargo/bin
-          key: ${{ runner.os }}-cargo-bin-mdbook-typst-pdf-${{ env.MDBOOK_TYPST_PDF_VERSION }}
-      
       - name: Install Rust
         run: |
           rustup set profile minimal
           rustup toolchain install 1.90 -c rust-docs
           rustup default 1.90
-      - name: Install mdbook
+      
+      - name: Install mdbook & mdbook-typst-pdf
         run: |
           mkdir bin
           curl -sSL https://github.com/rust-lang/mdBook/releases/download/v${MDBOOK_VERSION}/mdbook-v${MDBOOK_VERSION}-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
-          echo "$(pwd)/bin" >> "${GITHUB_PATH}"
+          curl -sSL https://github.com/KaiserY/mdbook-typst-pdf/releases/download/v${MDBOOK_TYPST_PDF_VERSION}/mdbook-typst-pdf-x86_64-unknown-linux-musl.tar.xz | tar -xJ --directory=bin --strip-components=1
+          echo "$(pwd)/bin" >> ${GITHUB_PATH}
       
-      - name: Install typst
+      - name: Install fonts
         run: |
-          curl -sSL https://github.com/typst/typst/releases/download/v${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz | tar -xJ --directory=bin --strip-components=1
-          echo "$(pwd)/bin" >> "${GITHUB_PATH}"
-      
-      - name: Install mdbook-typst-pdf
-        run: |
-          if ! command -v mdbook-typst-pdf &> /dev/null; then
-            cargo install mdbook-typst-pdf --version ${MDBOOK_TYPST_PDF_VERSION}
-          else
-            echo "mdbook-typst-pdf already installed (from cache)"
-          fi
+          echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+          sudo apt-get -y install msttcorefonts
+          mkdir fonts
+          mkdir -p ~/.local/share/fonts
+          
+          # 下载中文字体
+          curl -sL -o Noto_Sans_SC.zip https://github.com/notofonts/noto-cjk/releases/download/Sans2.004/08_NotoSansCJKsc.zip
+          unzip Noto_Sans_SC.zip -d fonts/Noto_Sans_SC
+          
+          # 下载等宽字体
+          curl -sL -o Noto_Sans_Mono.zip https://github.com/notofonts/latin-greek-cyrillic/releases/download/NotoSansMono-v2.014/NotoSansMono-v2.014.zip
+          unzip Noto_Sans_Mono.zip -d fonts/Noto_Sans_Mono
+          
+          # 下载基础字体
+          curl -sL -o Noto_Sans.zip https://github.com/notofonts/latin-greek-cyrillic/releases/download/NotoSans-v2.013/NotoSans-v2.013.zip
+          unzip Noto_Sans.zip -d fonts/Noto_Sans
+          
+          # 安装字体
+          mv fonts/* ~/.local/share/fonts/
+          fc-cache -rv
 
       # 2. 编译
       - name: Build book
