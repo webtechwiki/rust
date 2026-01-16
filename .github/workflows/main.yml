@@ -21,6 +21,25 @@ jobs:
     steps:
       # 1. 安装依赖
       - uses: actions/checkout@v4
+      
+      - name: Cache cargo registry
+        uses: actions/cache@v3
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-cargo-registry-${{ hashFiles('**/Cargo.lock') }}
+      
+      - name: Cache cargo index
+        uses: actions/cache@v3
+        with:
+          path: ~/.cargo/git
+          key: ${{ runner.os }}-cargo-index-${{ hashFiles('**/Cargo.lock') }}
+      
+      - name: Cache cargo build
+        uses: actions/cache@v3
+        with:
+          path: ~/.cargo/bin
+          key: ${{ runner.os }}-cargo-bin-mdbook-typst-pdf-${{ env.MDBOOK_TYPST_PDF_VERSION }}
+      
       - name: Install Rust
         run: |
           rustup set profile minimal
@@ -38,9 +57,7 @@ jobs:
           echo "$(pwd)/bin" >> "${GITHUB_PATH}"
       
       - name: Install mdbook-typst-pdf
-        run: |
-          curl -sSL https://github.com/KaiserY/mdbook-typst-pdf/releases/download/v${MDBOOK_TYPST_PDF_VERSION}/mdbook-typst-pdf-v${MDBOOK_TYPST_PDF_VERSION}-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
-          echo "$(pwd)/bin" >> "${GITHUB_PATH}"
+        run: cargo install mdbook-typst-pdf --version ${MDBOOK_TYPST_PDF_VERSION}
 
       # 2. 编译
       - name: Build book
