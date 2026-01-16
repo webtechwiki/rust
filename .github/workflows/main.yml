@@ -57,7 +57,12 @@ jobs:
           echo "$(pwd)/bin" >> "${GITHUB_PATH}"
       
       - name: Install mdbook-typst-pdf
-        run: cargo install mdbook-typst-pdf --version ${MDBOOK_TYPST_PDF_VERSION}
+        run: |
+          if ! command -v mdbook-typst-pdf &> /dev/null; then
+            cargo install mdbook-typst-pdf --version ${MDBOOK_TYPST_PDF_VERSION}
+          else
+            echo "mdbook-typst-pdf already installed (from cache)"
+          fi
 
       # 2. 编译
       - name: Build book
