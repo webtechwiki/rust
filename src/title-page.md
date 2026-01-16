@@ -8,7 +8,7 @@
 
 本书的英文原版 HTML 格式可以在 [https://doc.rust-lang.org/stable/book/](https://doc.rust-lang.org/stable/book/) 在线阅读；使用 `rustup` 安装的 Rust 也包含一份英文离线版，运行 `rustup docs --book` 即可打开。
 
-本书还有一些社区 [翻译版本][translations]。（译者注：简体中文译本可以在 [https://rust.webtech.wiki/](https://rust.webtech.wiki/) 在线阅读，PDF 版本请下载 [Rust 程序设计语言 简体中文版.pdf](https://rust.webtech.wiki/typst-pdf/book.pdf）
+本书还有一些社区 [翻译版本][translations]。（译者注：简体中文译本可以在 [https://rust.webtech.wiki/](https://rust.webtech.wiki/) 在线阅读，PDF 版本请下载 [Rust 程序设计语言 简体中文版.pdf](https://rust.webtech.wiki/pdf/book.pdf)
 
 本书也有[由 No Starch Press 出版的纸质版和电子版][nsprust]。
 

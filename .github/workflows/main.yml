@@ -62,6 +62,12 @@ jobs:
       # 2. 编译
       - name: Build book
         run: mdbook build
+      
+      # 2.5. 复制 PDF 到 HTML 目录
+      - name: Copy PDF to HTML directory
+        run: |
+          mkdir -p book/html/pdf
+          cp book/typst-pdf/*.pdf book/html/pdf/ || echo "No PDF files found"
 
       # 3. 上传产物到 gh-pages
       - name: Deploy to GitHub Pages
