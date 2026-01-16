@@ -31,10 +31,6 @@ jobs:
           echo "$(pwd)/bin" >> "${GITHUB_PATH}"
 
       # 2. 编译
-      - name: Build trpl crate
-        run: |
-          cd packages/trpl
-          cargo build
       - name: Build book
         run: mdbook build
 
