@@ -10,8 +10,8 @@ permissions:
   contents: write
 
 env:
-  MDBOOK_VERSION: 0.5.1
-  MDBOOK_TYPST_PDF_VERSION: 0.6.3
+  MDBOOK_VERSION: 0.5.2
+  MDBOOK_TYPST_PDF_VERSION: 0.7.0
   TYPST_VERSION: 0.12.0
 
 jobs:
